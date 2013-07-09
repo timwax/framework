@@ -69,14 +69,20 @@ class Command extends \Symfony\Component\Console\Command\Command {
 		// We will loop through all of the arguments and options for the command and
 		// set them all on the base command instance. This specifies what can get
 		// passed into these commands as "parameters" to control the execution.
-		foreach ($this->getArguments() as $arguments)
+		if (count($this->getArguments()) > 0)
 		{
-			call_user_func_array(array($this, 'addArgument'), $arguments);
+			foreach ($this->getArguments() as $arguments)
+			{
+				call_user_func_array(array($this, 'addArgument'), $arguments);
+			}
 		}
-
-		foreach ($this->getOptions() as $options)
+		
+		if (count($this->getOptions()) > 0)
 		{
-			call_user_func_array(array($this, 'addOption'), $options);
+			foreach ($this->getOptions() as $options)
+			{
+				call_user_func_array(array($this, 'addOption'), $options);
+			}
 		}
 	}
 
